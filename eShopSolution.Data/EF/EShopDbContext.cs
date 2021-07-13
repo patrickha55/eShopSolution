@@ -1,10 +1,7 @@
 ﻿using eShopSolution.Data.Configurations;
 using eShopSolution.Data.Entities;
-using Microsoft.AspNetCore.Identity;
+using eShopSolution.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace eShopSolution.Data.EF
 {
@@ -18,6 +15,7 @@ namespace eShopSolution.Data.EF
         {
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new ProductInCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
@@ -29,6 +27,7 @@ namespace eShopSolution.Data.EF
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
 
+            modelBuilder.Seed();
         }
 
         public DbSet<Product> Products { get; set; }
