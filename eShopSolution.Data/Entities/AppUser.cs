@@ -10,5 +10,9 @@ namespace eShopSolution.Data.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DoB { get; set; }
+        public List<Cart> Carts { get; set; }
+        public List<Order> Orders { get; set; }
+        public List<Transaction> Transactions { get; set; }
+
     }
 }
