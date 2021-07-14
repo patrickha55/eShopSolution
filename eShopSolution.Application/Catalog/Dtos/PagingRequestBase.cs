@@ -4,9 +4,9 @@ using System.Text;
 
 namespace eShopSolution.Application.Catalog.Dtos
 {
-    public class PageViewModel<T>
+    public class PagingRequestBase
     {
-        List<T> Items { get; set; }
-        public int TotalRecord { get; set; }
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
     }
 }

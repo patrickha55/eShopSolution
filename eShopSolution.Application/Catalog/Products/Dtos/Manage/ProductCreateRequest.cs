@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace eShopSolution.Application.Catalog.Products.Dtos
+namespace eShopSolution.Application.Catalog.Products.Dtos.Manage
 {
-    public class ProductViewModel
+    public class ProductCreateRequest
     {
         public int Id { get; set; }
         public decimal Price { get; set; }
