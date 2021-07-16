@@ -1,9 +1,7 @@
-﻿using eShopSolution.Application.Catalog.Dtos;
-using eShopSolution.Application.Catalog.Products.Dtos;
-using eShopSolution.Application.Catalog.Products.Dtos.Public;
-using eShopSolution.Data.EF;
+﻿using eShopSolution.Data.EF;
+using eShopSolution.ViewModels.Catalog.Products;
+using eShopSolution.ViewModels.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,11 +17,12 @@ namespace eShopSolution.Application.Catalog.Products
             _context = context;
         }
 
-        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetProductPagingRequest request)
+
+        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
         {
             var query = from p in _context.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
-                        join pic in _context.ProductInCategories on pt.Id equals pic.CategoryId
+                        join pic in _context.ProductInCategories on pt.ProductId equals pic.ProductId
                         join c in _context.Categories on pic.CategoryId equals c.Id
                         select new { p, pt, pic };
 
@@ -63,6 +62,33 @@ namespace eShopSolution.Application.Catalog.Products
             };
 
             return pagedResult;
+        }
+        public async Task<List<ProductViewModel>> GetAll()
+        {
+            var query = from p in _context.Products
+                        join pt in _context.ProductTranslations on p.Id equals pt.ProductId
+                        join pic in _context.ProductInCategories on pt.ProductId equals pic.ProductId
+                        join c in _context.Categories on pic.CategoryId equals c.Id
+                        select new { p, pt, pic };
+
+            var data = await query.Select(x => new ProductViewModel()
+                {
+                    Id = x.p.Id,
+                    Price = x.p.Price,
+                    OriginalPrice = x.p.OriginalPrice,
+                    Stock = x.p.Stock,
+                    ViewCount = x.p.ViewCount,
+                    DateCreated = x.p.DateCreated,
+                    Name = x.pt.Name,
+                    Description = x.pt.Description,
+                    Details = x.pt.Details,
+                    SeoDescription = x.pt.SeoDescription,
+                    SeoTitle = x.pt.SeoTitle,
+                    SeoAlias = x.pt.SeoAlias,
+                    LanguageId = x.pt.LanguageId
+                }).ToListAsync();
+
+            return data;
         }
     }
 }
