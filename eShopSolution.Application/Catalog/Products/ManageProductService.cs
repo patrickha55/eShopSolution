@@ -15,7 +15,7 @@ using eShopSolution.Application.Common;
 
 namespace eShopSolution.Application.Catalog.Products
 {
-    class ManageProductService : IManageProductService
+    public class ManageProductService : IManageProductService
     {
         private readonly EShopDbContext _context;
         private readonly IStorageService _storageService;
