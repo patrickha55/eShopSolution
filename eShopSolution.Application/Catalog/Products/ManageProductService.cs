@@ -229,15 +229,17 @@ namespace eShopSolution.Application.Catalog.Products
 
         private async Task<string> SaveFile(IFormFile file)
         {
-            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            /*var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
             await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
-            return fileName;
+            return fileName;*/
+            throw new NotImplementedException();
+
         }
 
         public async Task<int> AddImage(int productId, List<IFormFile> files)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
+            /*var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
 
             if (product is null) throw new EShopException("Product with provided id does not exists!");
 
@@ -257,36 +259,41 @@ namespace eShopSolution.Application.Catalog.Products
                 };
             }
 
-            return await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();*/
+            throw new NotImplementedException();
         }
 
         public async Task<int> UpdateImage(int imageId, string caption, bool isDefault)
         {
-            var image = await _context.ProductImages.FirstOrDefaultAsync(i => i.Id == imageId);
+            /*var image = await _context.ProductImages.FirstOrDefaultAsync(i => i.Id == imageId);
 
             if (image is null) throw new EShopException("Image does not exists!");
 
             image.Caption = caption;
             image.IsDefault = isDefault;
 
-            return await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();*/
+            throw new NotImplementedException();
+
         }
 
         public async Task<int> RemoveImages(int imageId)
         {
-            var image = await _context.ProductImages.FirstOrDefaultAsync(i => i.Id == imageId);
+            /*var image = await _context.ProductImages.FirstOrDefaultAsync(i => i.Id == imageId);
             //var product = await _context.Products.FirstOrDefaultAsync();
 
             if (image is null) throw new EShopException("Image does not exists!");
 
             _context.ProductImages.Remove(image);
 
-            return await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();*/
+            throw new NotImplementedException();
+
         }
 
         public async Task<List<ProductImageViewModel>> GetListImage(int productId)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
+            /*var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
 
             if (product is null) throw new EShopException("Product with provided id does not exists!");
 
@@ -303,7 +310,8 @@ namespace eShopSolution.Application.Catalog.Products
                 });
             };
 
-            return imageViewModels;
+            return imageViewModels;*/
+            throw new NotImplementedException();
         }
 
     }

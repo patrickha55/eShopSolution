@@ -17,6 +17,7 @@ namespace eShopSolution.BackendApi.Controllers
             _manageProductService = manageProductService;
         }
 
+        //public
         //http://localhost:port/product
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -26,16 +27,18 @@ namespace eShopSolution.BackendApi.Controllers
         }
 
         //http://localhost:port/product/paging-request
-        [HttpGet("{paging-request}")]
+        [HttpGet("{request}")]
         public async Task<IActionResult> Get([FromQuery] GetPublicProductPagingRequest request)
         {
             var product = await _publicProductService.GetAllByCategoryId(request);
             return Ok(product);
         }
 
+
+        //manage
         //http://localhost:port/product/product-id/language-id
         [HttpGet("{product-id}")]
-        public async Task<IActionResult> GetById(int productId, string languageId)
+        public async Task<IActionResult> GetById([FromQuery]int productId, string languageId)
         {
             var products = await _manageProductService.GetById(productId, languageId);
 
@@ -44,20 +47,62 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok(products);
         }
 
-        [HttpPost]
+        [HttpGet("Product/{request}")]
+        public async Task<IActionResult> GetAllPaging([FromQuery]GetManageProductPagingRequest request)
+        {
+            var product = await _manageProductService.GetAllPaging(request);
+            return Ok(product);
+        }
+
+        /*[HttpPost]
         public async Task<IActionResult> Create([FromBody] ProductCreateRequest request)
         {
             var result = await _manageProductService.Create(request);
 
-            if (request is null) return BadRequest();
+            if (result == 0) return BadRequest();
 
-            return CreatedAtAction(nameof(GetById), );
-        }
+            return CreatedAtAction(nameof(GetById), new { productId = });
+        }*/
+
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody])
+        public async Task<IActionResult> Update([FromBody]ProductUpdateRequest request)
         {
+            var result = await _manageProductService.Update(request);
 
+            if (result == 0) return BadRequest();
+
+            return Ok();
+        }
+
+        [HttpPut("price/{id}/{newPrice}")]
+        public async Task<IActionResult> UpdatePrice([FromQuery]int id, decimal newPrice)
+        {
+            var result = await _manageProductService.UpdatePrice(id, newPrice);
+
+            if (result is false) return BadRequest();
+
+            return Ok();
+        }
+
+        [HttpPut("stock/{id}/{stock}")]
+        public async Task<IActionResult> UpdateStock([FromQuery]int id, int stock)
+        {
+            var result = await _manageProductService.UpdateStock(id, stock);
+
+            if (result is false) return BadRequest();
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _manageProductService.Delete(id);
+
+            if (result == 0) return BadRequest();
+
+            return Ok();
         }
     }
 }
