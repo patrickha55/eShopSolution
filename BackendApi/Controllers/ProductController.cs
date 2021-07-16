@@ -27,8 +27,8 @@ namespace eShopSolution.BackendApi.Controllers
         }
 
         //http://localhost:port/product/paging-request
-        [HttpGet("{request}")]
-        public async Task<IActionResult> Get([FromQuery] GetPublicProductPagingRequest request)
+        [HttpGet("GetPublicPaging/{request}")]
+        public async Task<IActionResult> Get([FromQuery]GetPublicProductPagingRequest request)
         {
             var product = await _publicProductService.GetAllByCategoryId(request);
             return Ok(product);
@@ -37,8 +37,8 @@ namespace eShopSolution.BackendApi.Controllers
 
         //manage
         //http://localhost:port/product/product-id/language-id
-        [HttpGet("{product-id}")]
-        public async Task<IActionResult> GetById([FromQuery]int productId, string languageId)
+        [HttpGet("GetById/{productId}/{languageId}")]
+        public async Task<IActionResult> GetById(int productId, string languageId)
         {
             var products = await _manageProductService.GetById(productId, languageId);
 
@@ -47,26 +47,28 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok(products);
         }
 
-        [HttpGet("Product/{request}")]
+        [HttpGet("GetAllPaging/{request}")]
         public async Task<IActionResult> GetAllPaging([FromQuery]GetManageProductPagingRequest request)
         {
             var product = await _manageProductService.GetAllPaging(request);
             return Ok(product);
         }
 
-        /*[HttpPost]
-        public async Task<IActionResult> Create([FromBody] ProductCreateRequest request)
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
-            var result = await _manageProductService.Create(request);
+            var productId = await _manageProductService.Create(request);
 
-            if (result == 0) return BadRequest();
+            if (productId == 0) return BadRequest();
 
-            return CreatedAtAction(nameof(GetById), new { productId = });
-        }*/
+            var product = await _manageProductService.GetById(productId, request.LanguageId);
+
+            return CreatedAtAction(nameof(GetById), new { id = productId}, product);
+        }
 
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody]ProductUpdateRequest request)
+        public async Task<IActionResult> Update([FromForm]ProductUpdateRequest request)
         {
             var result = await _manageProductService.Update(request);
 
@@ -75,8 +77,8 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok();
         }
 
-        [HttpPut("price/{id}/{newPrice}")]
-        public async Task<IActionResult> UpdatePrice([FromQuery]int id, decimal newPrice)
+        [HttpPut("update-price/{id}/{newPrice}")]
+        public async Task<IActionResult> UpdatePrice(int id, decimal newPrice)
         {
             var result = await _manageProductService.UpdatePrice(id, newPrice);
 
@@ -85,8 +87,8 @@ namespace eShopSolution.BackendApi.Controllers
             return Ok();
         }
 
-        [HttpPut("stock/{id}/{stock}")]
-        public async Task<IActionResult> UpdateStock([FromQuery]int id, int stock)
+        [HttpPut("update-stock/{id}/{stock}")]
+        public async Task<IActionResult> UpdateStock(int id, int stock)
         {
             var result = await _manageProductService.UpdateStock(id, stock);
 
