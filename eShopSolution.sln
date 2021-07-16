@@ -13,7 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopSolution.Utilities", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopSolution.ViewModels", "eShopSolution.ViewModels\eShopSolution.ViewModels.csproj", "{78CB5F33-F62B-4A90-92C2-112DD47E4528}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShopSolution.BackendApi", "BackendApi\eShopSolution.BackendApi.csproj", "{1F2A7F49-C855-4CAF-A81D-2318D43564C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShopSolution.BackendApi", "BackendApi\eShopSolution.BackendApi.csproj", "{1F2A7F49-C855-4CAF-A81D-2318D43564C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Solution Items", "{67C48EA8-8C41-4F26-82F2-E4571925506A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domain", "2. Domain", "{F298435C-2CF6-425D-A2EE-A2D4EEF283DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Infrastructure", "1. Infrastructure", "{3536FD0E-A587-4235-ADBF-D873C1F03022}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Hosts", "3. Hosts", "{074820DA-8C60-41CF-A8C7-0F9930467B88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +56,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C1C0238-7EE4-4E0D-97C6-88F52CC6556F} = {074820DA-8C60-41CF-A8C7-0F9930467B88}
+		{829D6E65-CDD6-4CB9-8730-97258A2222E4} = {F298435C-2CF6-425D-A2EE-A2D4EEF283DE}
+		{2BA7F1A9-1161-4FB9-B8D1-C205134E183B} = {F298435C-2CF6-425D-A2EE-A2D4EEF283DE}
+		{0C00293B-C5F3-4482-8232-A002C643FAB0} = {3536FD0E-A587-4235-ADBF-D873C1F03022}
+		{78CB5F33-F62B-4A90-92C2-112DD47E4528} = {3536FD0E-A587-4235-ADBF-D873C1F03022}
+		{1F2A7F49-C855-4CAF-A81D-2318D43564C2} = {074820DA-8C60-41CF-A8C7-0F9930467B88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7DB79C99-AAF6-41D5-9BA0-1D6B78091684}
