@@ -20,6 +20,6 @@ namespace eShopSolution.ViewModels.Catalog.Products
 
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
-        public IFormFile MyProperty { get; set; }
+        public IFormFile ProductImage { get; set; }
     }
 }

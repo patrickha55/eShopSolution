@@ -8,6 +8,7 @@ namespace eShopSolution.Application.Catalog.Products
 {
     public interface IManageProductService
     {
+        Task<ProductViewModel> GetById(int productId, string languageId);
         Task<int> Create(ProductCreateRequest request);
 
         Task AddViewcount(int productId);

@@ -25,6 +25,35 @@ namespace eShopSolution.Application.Catalog.Products
             _context = context;
             _storageService = storageService;
         }
+
+        public async Task<ProductViewModel> GetById(int productId, string languageId)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync( p => p.Id == productId);
+            var productTranlation = await _context.ProductTranslations.FirstOrDefaultAsync( pt => pt.LanguageId == languageId);
+
+            if (product is null) throw new EShopException("The product with provided id does not exists!");
+            if (productTranlation is null) throw new EShopException("The language with provided id does not exists!");
+
+            var viewModel = new ProductViewModel()
+            {
+                Id = product.Id,
+                Price = product.Price,
+                OriginalPrice = product.OriginalPrice,
+                Stock = product.Stock,
+                ViewCount = product.ViewCount,
+                DateCreated = product.DateCreated,
+                Name = productTranlation.Name,
+                Description = productTranlation.Description,
+                Details = productTranlation.Details,
+                SeoDescription = productTranlation.SeoDescription,
+                SeoTitle = productTranlation.SeoTitle,
+                SeoAlias = productTranlation.SeoAlias,
+                LanguageId = productTranlation.LanguageId
+            };
+
+            return viewModel;
+        }
+
         public async Task<int> Create(ProductCreateRequest request)
         {
             var product = new Product()
@@ -276,5 +305,6 @@ namespace eShopSolution.Application.Catalog.Products
 
             return imageViewModels;
         }
+
     }
 }
