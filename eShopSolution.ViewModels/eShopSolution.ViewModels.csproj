@@ -66,6 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\eShopSolution.Application\Common\FileStorageService.cs">
+      <Link>FileStorageService.cs</Link>
+    </Compile>
     <Compile Include="Catalog\Products\GetManageProductPagingRequest.cs" />
     <Compile Include="Catalog\Products\ProductCreateRequest.cs" />
     <Compile Include="Catalog\Products\ProductUpdateRequest.cs" />

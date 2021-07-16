@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\eShopSolution.Application\Common\FileStorageService.cs">
+      <Link>FileStorageService.cs</Link>
+    </Compile>
     <Compile Include="Constants\SystemConstants.cs" />
     <Compile Include="Exceptions\EShopException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
